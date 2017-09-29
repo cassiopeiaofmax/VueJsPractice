@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="compute1">{{fullName}}</div>
+<div id="compute2">{{fullName}}</div>
+</body>
+<script>
+    var compute1 = new Vue({
+        el: "#compute1",
+        data: {
+            firstName: 'latency',
+            lastName: 'cheng'
+        },
+        computed:{
+            fullName: function () {
+                return this.firstName + ' ' + this.lastName;
+            }
+        }
+    });
+
+    var compute2 = new Vue({
+        el: "#compute2",
+        data: {
+            firstName: 'latency',
+            lastName: 'cheng'
+        },
+        computed: {
+            fullName : {
+                get: function(){
+                    return this.firstName + ' ' + this.lastName;
+                },
+                set: function(newName){
+                    var name = newName.split(' ');
+                    this.firstName = name[0];
+                    this.lastName = name[name.length - 1];
+                }
+            }
+        }
+    })
+</script>
+</html>

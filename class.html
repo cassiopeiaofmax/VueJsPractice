@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class绑定</title>
+    <style>
+        .active{
+            color: green;
+        }
+        .danger{
+            background: gainsboro;
+        }
+    </style>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="class1" v-bind:class="{active: isActive, danger: hasError}">
+    第一段测试 v-bind:class="{active: isActive, danger: hasError}"
+</div>
+<div id="class2" v-bind:class="classObj">
+    第二段测试 v-bind:class="classObj"
+</div>
+<div id="class3" v-bind:class="[activeClass, errorClass]">
+    第三段测试 v-bind:class="[activeClass, errorClass]"
+</div>
+<div id="class4" v-bind:class="[{active: isActive}, errorClass]">
+    第四段测试 v-bind:class="[{active: isActive}, errorClass]"
+</div>
+</body>
+<script>
+    var class1 = new Vue({
+        el: "#class1",
+        data: {
+            isActive: true,
+            hasError: false
+        }
+    });
+    var class2 = new Vue({
+        el: "#class2",
+        data: {
+            classObj: {
+                active: true,
+                danger: false
+            }
+        }
+    });
+    var class3 = new Vue({
+        el: "#class3",
+        data: {
+            activeClass: 'active',
+            errorClass: 'danger'
+        }
+    });
+    var class4 = new Vue({
+        el: "#class4",
+        data: {
+            isActive: true,
+            errorClass: 'danger'
+        }
+    })
+</script>
+</html>
