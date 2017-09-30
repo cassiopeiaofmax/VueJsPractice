@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for列表渲染</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="for1">
+    <ul>
+        <li v-for="(item,index) in items">{{index}}: {{item}}</li>
+    </ul>
+</div>
+<div id="for2">
+    <ul>
+        <li v-for="(value,key) in items">{{key}}: {{value}}</li>
+    </ul>
+</div>
+<div id="for3">
+    <ul>
+        <li v-for="(value,key,index) in items">{{index}}. {{key}}: {{value}}</li>
+    </ul>
+</div>
+<div id="todo-list">
+    <input
+        v-model="newTodo"
+        @keyup.enter="addNewTodo"
+        placeholder="Add sth todo"
+    >
+    <ul>
+        <li
+            is="todo-item"
+            v-for="(item, index) in items"
+            :key="item.id"
+            :no="item.id"
+            :title="item.title"
+            @remove="items.splice(index, 1)"
+        ></li>
+    </ul>
+</div>
+</body>
+<script>
+    var for1 = new Vue({
+        el: "#for1",
+        data: {
+            items: ['one', 'two', 'three']
+        }
+    });
+    var data = {
+        items: {
+            one: '111',
+            two: '222',
+            three: '333'
+        }
+    };
+    var for2 = new Vue({
+        el: "#for2",
+        data: data
+    });
+    var for3 = new Vue({
+        el: "#for3",
+        data: data
+    });
+    Vue.component('todo-item',{
+        template:
+        '<li>' +
+            '{{no}}:{{title}}' +
+            '<button @click="$emit(\'remove\')">X</button>' +
+        '</li>',
+        props: ['no','title']
+    });
+    var todoList = new Vue({
+        el: "#todo-list",
+        data:{
+            newTodo: '',
+            items: [
+                {
+                    id: 1,
+                    title: 'The first thing todo.'
+                },
+                {
+                    id: 2,
+                    title: 'The second thing todo.'
+                },
+                {
+                    id: 3,
+                    title: 'The third thing todo.'
+                }
+            ],
+            todoListLen: 4
+        },
+        methods: {
+            addNewTodo: function(){
+                this.items.push({
+                    id: this.todoListLen++,
+                    title: this.newTodo
+                });
+                this.newTodo = '';
+            }
+        }
+    })
+</script>
+</html>

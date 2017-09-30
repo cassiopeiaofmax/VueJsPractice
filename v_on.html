@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理程序</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="on1">
+    <button @click="++count">按钮点我</button>
+    <p>按钮被点击了{{count}}次</p>
+</div>
+<div id="on2">
+    <input placeholder="input name" v-model="name">
+    <button @click="greet">Greet</button>
+</div>
+<div id="on3" >
+    <p @click.ctrl="doSomething">Do something</p>
+</div>
+<div id="on4">
+    <input @keyup.alt.67="clear">
+</div>
+</body>
+<script>
+    var on1 = new Vue({
+        el: "#on1",
+        data: {
+            count: 0
+        }
+    });
+    var on2 = new Vue({
+        el: "#on2",
+        data: {
+            name: ''
+        },
+        methods: {
+            greet: function () {
+                alert('Hello ' + this.name + '!');
+            }
+        }
+    });
+    var on3 = new Vue({
+        el: "#on3",
+        methods: {
+            doSomething: function () {
+                alert('click & ctrl')
+            }
+        }
+    });
+    var on4 = new Vue({
+        el: "#on4",
+        methods: {
+            clear: function () {
+                alert('clear')
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单绑定</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="model1">
+    <input type="radio" v-model="picked" id="radio" value="picked">
+    <label for="radio">picked</label>
+    <p>Picked: {{picked}}</p>
+    <input type="checkbox" v-model="check" id="mes">
+    <label for="mes">{{check}}</label>
+</div>
+<div id="model2">
+    <p>人员名单:</p>
+    <input type="checkbox" v-model="checkedNames" value="latency" id="latency">
+    <label for="latency">latency</label>
+    <input type="checkbox" v-model="checkedNames" value="feng" id="feng">
+    <label for="feng">feng</label>
+    <input type="checkbox" v-model="checkedNames" value="tantan" id="tantan">
+    <label for="tantan">tantan</label>
+    <p>已选人员: {{ checkedNames }}</p>
+</div>
+<div id="model3">
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <p>Picked: {{picked}}</p>
+</div>
+<div id="model4">
+    <select v-model="selected">
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <p>Selected: {{selected}}</p>
+</div>
+<div id="model5">
+    <select v-model="selected" multiple>
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <p>Selected: {{selected}}</p>
+</div>
+<div id="model6">
+    <select v-model="selected">
+        <option v-for="item in items" :value="item.value">{{item.text}}</option>
+    </select>
+    <p>Selected: {{selected}}</p>
+</div>
+<div id="model7">
+    <!--修饰符 .lazy-->
+    <input type="text" v-model.lazy="msg" placeholder="message">
+    <p>message: {{msg}}</p>
+    <!--修饰符 .number-->
+    <input type="number" v-model.number="age" placeholder="age">
+    <br>
+    <!--修饰符 .tirm-->
+    <input type="text" v-model.tirm="tirmMsg" placeholder="tirmMsg">
+    <p>message: {{tirmMsg}}</p>
+</div>
+<script>
+    var model1 = new Vue({
+        el: "#model1",
+        data: {
+            picked: '',
+            check: false
+        }
+    });
+    new Vue({
+        el: "#model2",
+        data: {
+            checkedNames: []
+        }
+    });
+    new Vue({
+        el: "#model3",
+        data: {
+            picked: ''
+        }
+    });
+    new Vue({
+        el: "#model4",
+        data: {
+            selected: ''
+        }
+    });
+    new Vue({
+        el: "#model5",
+        data: {
+            selected: []
+        }
+    });
+    new Vue({
+        el: "#model6",
+        data: {
+            selected: 'A',
+            items: [
+                {
+                    text: 'one', value: 'A'
+                },
+                {
+                    text: 'two', value: 'B'
+                },
+                {
+                    text: 'three', value: 'C'
+                }
+            ]
+        }
+    });
+    new Vue({
+        el: "#model7",
+        data: {
+            msg: '',
+            age: '6',
+            tirmMsg: '   abc   '
+        }
+    })
+</script>
+</body>
+</html>
